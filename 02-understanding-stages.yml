@@ -43,7 +43,7 @@ stages:
 #   dependsOn: 
 #   - DevDeploy
 #   - QADeploy
-  jobs:
-  - job: ProdDeployJob
-    steps:
-    - bash: echo $(environment)DeployJob
+  # jobs:
+  # - job: ProdDeployJob
+  #   steps:
+  #   - bash: echo $(environment)DeployJob
