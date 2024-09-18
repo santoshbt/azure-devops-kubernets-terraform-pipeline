@@ -29,10 +29,9 @@ steps:
     ensureBackend: true
     backendAzureRmResourceGroupName: 'terraform-backend-rg'
     backendAzureRmResourceGroupLocation: 'eastus'
-    backendAzureRmStorageAccountName: 'storageacctsantoshbt'
-    backendAzureRmContainerName: 'storageacctsantoshcontainer'
+    backendAzureRmStorageAccountName: 'storageacctsantoshbt1'
+    backendAzureRmContainerName: 'storageacctsantoshcontainer1'
     backendAzureRmKey: 'kubernetes-dev-tfstate'
-    allowTelemetryCollection: false
 
 # - task: TerraformCLI@0
 #   inputs:
