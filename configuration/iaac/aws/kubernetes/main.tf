@@ -7,7 +7,7 @@
 
 terraform {
   backend "s3" {
-    bucket = "mybucket" # Will be overridden from build
+    bucket = "terraform-backend-state-santoshbt-1985" # Will be overridden from build
     key    = "path/to/my/key" # Will be overridden from build
     region = "us-east-1"
   }
@@ -32,7 +32,7 @@ module "in28minutes-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = "in28minutes-cluster"
   cluster_version = "1.14"
-  subnets         = ["subnet-3f7b2563", "subnet-4a7d6a45"] #CHANGE
+  subnets         = ["subnet-051d486a46fb6da6c", "subnet-06ab2cf2ff753dccd"] #CHANGE
   #subnets = data.aws_subnet_ids.subnets.ids
   vpc_id          = aws_default_vpc.default.id
 
@@ -58,7 +58,7 @@ data "aws_eks_cluster_auth" "cluster" {
 
 
 # We will use ServiceAccount to connect to K8S Cluster in CI/CD mode
-# ServiceAccount needs permissions to create deployments 
+# ServiceAccount needs permissions to create deployments
 # and services in default namespace
 resource "kubernetes_cluster_role_binding" "example" {
   metadata {
