@@ -13,6 +13,11 @@ terraform {
   }
 }
 
+variable "subnets" {
+  type = list(string)
+  description = "List of subnet IDs to associate with the cluster"
+}
+
 resource "aws_default_vpc" "default" {
 
 }
@@ -28,24 +33,25 @@ provider "kubernetes" {
   version                = "~> 2.12"
 }
 
+
 module "in28minutes-cluster" {
   source          = "terraform-aws-modules/eks/aws"
+  version         = "17.10.0"
   cluster_name    = "in28minutes-cluster"
-  cluster_version = "1.14"
-  subnets         = ["subnet-051d486a46fb6da6c", "subnet-06ab2cf2ff753dccd"] #CHANGE
+  cluster_version = "1.21"
+  subnets         = ["subnet-051d486a46fb6da6c", "subnet-01836f785a31c83aa", "subnet-06ab2cf2ff753dccd"] #CHANGE
   #subnets = data.aws_subnet_ids.subnets.ids
   vpc_id          = aws_default_vpc.default.id
 
   #vpc_id         = "vpc-1234556abcdef"
 
-  node_groups = [
+  worker_groups = [
     {
       instance_type = "t2.micro"
-      max_capacity  = 5
-      desired_capacity = 3
-      min_capacity  = 3
+      asg_max_size  = 3
     }
   ]
+
 }
 
 data "aws_eks_cluster" "cluster" {
